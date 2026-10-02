@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title> CSS </title>
+        <!--Avantika Pazhetam | Section: 06-->
+        <!--On my honor, I have neither received nor given any unauthorized assistance on this assignment.-->
+
+        <style>
+            body {
+                background-color: blue;
+            }
+        </style>
+    </head>
+
+    <body>
+            <h1 style="color: lime;">Tax Processing </h1>
+            
+            <p><b style="color: yellow;">Income: </b><span style="color: white;">$</span> <input type="text" id="incomeBox" onchange=''></p>
+            <p><b style="color: yellow;">Number of Dependents:</b> <input type="text" id="dependentsBox" onchange=''></p>
+            <p><b style="color: yellow;">Other Deductions: </b><span style="color: white;">$</span><input type="text" id="deductionsBox" onchange=''></p>
+
+            <p><b style="color: yellow;">State:</b> 
+                <input type="radio" name="state" id="radioNJ" value="NJ"> <span style="color: white;">NJ</span> 
+                <input type="radio" name="state" id="radioNY" value="NY"> <span style="color: white;">NY</span>
+                <input type="radio" name="state" id="radioCT" value="CT"> <span style="color: white;"> CT</span>
+            </p>
+
+            <p>
+                <button onclick = '
+                    var income = Number(incomeBox.value);
+                    var dependents = Number(dependentsBox.value);
+                    var deductions = Number(deductionsBox.value);
+
+                    var stateValue = "";
+                    if (radioNJ.checked) {
+                        stateValue = radioNJ.value;
+                    }
+                    else if (radioNY.checked) {
+                        stateValue = radioNY.value;
+                    }
+                    else if (radioCT.checked) {
+                        stateValue = radioCT.value;
+                    }
+
+                    var deductionPerDependent = 2500;
+                    var adjustedIncome = income - (dependents * deductionPerDependent) - deductions;
+
+                    var taxRate;
+                    if (stateValue == "NJ") {
+                        taxRate = 0.07;
+                    }
+                    else if (stateValue == "NY") {
+                        taxRate = 0.08;
+                    }
+                    else if (stateValue == "CT") {
+                        taxRate = 0.05;
+                    }
+
+                    var taxOwed = adjustedIncome * taxRate;
+
+                    resultBox.value = "The " + stateValue + " tax amount you owe based on your adjusted income of $" + adjustedIncome.toFixed(2) + " is: " + taxOwed.toFixed(2) + ".";
+
+                    '>Process</button>
+            </p>
+
+            <p><b style="color: yellow;">Result:</b> <input type="text" id="resultBox" size="80" onchange=''></p>
+
+
+    </body>
